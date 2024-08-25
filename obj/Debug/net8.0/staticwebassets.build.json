@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "3AfV5KNtYQv0ZQKYPss1Ty5C9Dl0qPSRYPT8IOlxUVs=",
+  "Source": "cs-webapi",
+  "BasePath": "_content/cs-webapi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
