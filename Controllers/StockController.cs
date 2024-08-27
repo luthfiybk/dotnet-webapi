@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using cs_webapi.Data;
 using cs_webapi.Dtos.Stock;
+using cs_webapi.Helpers;
 using cs_webapi.Interfaces;
 using cs_webapi.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -24,17 +25,13 @@ namespace cs_webapi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
 
-            var stocks = await _stockRepository.GetAllStockAsync();
+            var stocks = await _stockRepository.GetAllStockAsync(query);
             
             var stockDto = stocks.Select(s => s.ToStockDto());
-
-            if(stocks == null) {
-                return NotFound();
-            }
 
             return Ok(stocks);
         }
@@ -84,7 +81,7 @@ namespace cs_webapi.Controllers
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
-            
+
             var stockModel = await _stockRepository.DeleteStockAsync(id);
 
             if(stockModel == null) {
